@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "NoteHub",
     description: "This is a modern web application on Next.js using App Router",
-    url: "https://08-zustand-theta-nine.vercel.app/",
+    url: "https://notehub.com",
     images: [
       {
         url: `https://ac.goit.global/fullstack/react/notehub-og-meta.jpg`,
@@ -44,14 +44,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={roboto.variable}>
         <TanStackProvider>
-        <AuthProvider>
-        <Header />
-          <main>
-            {children}
-            {modal}
-          </main>
-          <Footer />
-        </AuthProvider>
+          <AuthProvider>
+            <Header />
+            <main>
+              {children}
+              {modal}
+            </main>
+            <Footer />
+          </AuthProvider>
         </TanStackProvider>
       </body>
     </html>

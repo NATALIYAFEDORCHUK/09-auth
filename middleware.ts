@@ -15,7 +15,8 @@ export async function middleware(request: NextRequest) {
 
   const isAuthRoute = authRoutes.some((route) => pathname.startsWith(route));
   const isPrivateRouter = privateRoutes.some((route) =>
-    pathname.startsWith(route));
+    pathname.startsWith(route)
+  );
 
   if (!accessToken) {
     if (refreshToken) {

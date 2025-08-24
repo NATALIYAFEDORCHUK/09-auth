@@ -9,7 +9,9 @@ import css from "./AuthNavigation.module.css";
 
 export default function AuthNavigation() {
   const router = useRouter();
-  const { isAuthenticated, user } = useAuthStore();
+
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
   const clearIsAuthenticated = useAuthStore(
     (state) => state.clearIsAuthenticated
   );
@@ -22,18 +24,25 @@ export default function AuthNavigation() {
 
   return (
     <>
-      <li className={css.navigationItem}>
-        <Link href="/profile" prefetch={false} className={css.navigationLink}>
-          Profile
-        </Link>
-      </li>
       {isAuthenticated ? (
-        <li className={css.navigationItem}>
-          <p className={css.userEmail}>{user?.email}</p>
-          <button onClick={handleLogout} className={css.logoutButton}>
-            Logout
-          </button>
-        </li>
+        <>
+          <li className={css.navigationItem}>
+            <Link
+              href="/profile"
+              prefetch={false}
+              className={css.navigationLink}
+            >
+              Profile
+            </Link>
+          </li>
+
+          <li className={css.navigationItem}>
+            <p className={css.userEmail}>{user?.email}</p>
+            <button onClick={handleLogout} className={css.logoutButton}>
+              Logout
+            </button>
+          </li>
+        </>
       ) : (
         <>
           <li className={css.navigationItem}>

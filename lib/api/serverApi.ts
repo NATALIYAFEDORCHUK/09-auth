@@ -12,6 +12,7 @@ export const checkServerSession = async () => {
   });
   return res;
 };
+
 export interface FetchNotesResponse {
   notes: Note[];
   page: number;
@@ -57,12 +58,28 @@ export const fetchServerNotes = async ({
   return res.data;
 };
 
-export const getServerMe = async (): Promise<User> => {
-  const cookieStore = await cookies();
-  const { data } = await nextServer.get("/users/me", {
+export const getServerMe = async (): Promise<User | null> => {
+  try {
+    const cookieStore = await cookies();
+    const { data } = await nextServer.get("/users/me", {
+      headers: {
+        Cookie: cookieStore.toString(),
+      },
+    });
+    return data;
+  } catch (error) {
+    console.error("Failed to fetch user on server:", error);
+    return null;
+  }
+};
+export const fetchNoteByIdServer = async (id: string): Promise<Note> => {
+  const cookieStore = cookies();
+
+  const res = await nextServer.get<Note>(`/notes/${id}`, {
     headers: {
       Cookie: cookieStore.toString(),
     },
   });
-  return data;
+
+  return res.data;
 };

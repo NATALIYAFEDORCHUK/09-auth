@@ -35,7 +35,8 @@ const NotePreviewClient = () => {
       <div className={css.container}>
         <div className={css.item}>
           <div className={css.header}>
-            <h2>{note.title}</h2>
+            <h2 className={css.title}>{note.title}</h2>
+            <p className={css.tag}>{note.tag}</p>
           </div>
           <p className={css.content}>{note.content}</p>
           <p className={css.date}>
@@ -43,6 +44,9 @@ const NotePreviewClient = () => {
           </p>
         </div>
       </div>
+      <button className={css.backButton} onClick={handleGoBack}>
+        Back
+      </button>
     </Modal>
   );
 };

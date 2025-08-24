@@ -27,7 +27,7 @@ export default function SignInPage() {
         (error as ApiError).response?.data?.error ??
           (error as ApiError).message ??
           "Oopc... some error"
-      )
+      );
     }
   };
 
