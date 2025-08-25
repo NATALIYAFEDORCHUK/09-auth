@@ -25,7 +25,6 @@ export const fetchNotes = async ({
   const params: Record<string, string | number> = {
     page,
     perPage,
-    ...(query !== "" && { query }),
     ...(tag !== undefined ? { tag } : {}),
   };
   if (query.trim()) {
@@ -62,7 +61,7 @@ export const fetchNoteById = async (id: string): Promise<Note> => {
 export type RegisterRequest = {
   email: string;
   password: string;
-  userName: string;
+  username: string;
 };
 
 export const register = async (data: RegisterRequest) => {
@@ -70,11 +69,11 @@ export const register = async (data: RegisterRequest) => {
   return res.data;
 };
 
-type CheckSessionRequest = {
+export type CheckSessionRequest = {
   success: boolean;
 };
 
-export const checkSession = async () => {
+export const checkSession = async (): Promise<boolean> => {
   const res = await nextServer.get<CheckSessionRequest>("/auth/session");
   return res.data.success;
 };
@@ -100,7 +99,6 @@ export const login = async (data: LoginRequest) => {
 
 export type UpdateUserRequest = {
   username?: string;
-  photoUrl?: string;
 };
 
 export const updateMe = async (payload: UpdateUserRequest) => {

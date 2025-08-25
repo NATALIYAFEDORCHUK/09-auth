@@ -11,6 +11,7 @@ export default function EditProfilePage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const user = useAuthStore((state) => state.user);
+  const setUser = useAuthStore((state) => state.setUser);
 
   useEffect(() => {
     getMe()
@@ -26,7 +27,8 @@ export default function EditProfilePage() {
 
   const handleSaveUser = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    await updateMe({ username });
+    const updatedUser = await updateMe({ username });
+    setUser(updatedUser);
     router.push("/profile");
   };
   const handleBack = () => {
